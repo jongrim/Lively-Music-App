@@ -14,6 +14,8 @@ Where appropriate, results are shown using a map-based view, supported by Google
 
 ## Contributors
 This software was designed and developed by the following team of students at the Georgia Tech Coding Boot Camp:
+
+
 |Name|Role|GitHub|LinkedIn|Portfolio|
 |----|----|------|--------|---------|
 |Hajar Zemzem|Core developer|[Hajar's GitHub](https://github.com/hzemzem)|[Hajar's LinkedIn](https://www.linkedin.com/in/hajarzemzem/)
