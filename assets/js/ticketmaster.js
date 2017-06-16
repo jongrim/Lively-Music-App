@@ -39,8 +39,8 @@ var TicketMaster = (function() {
     });
   }
 
-  // Artist search
-  function artistSearch(params) {
+  // Attraction search
+  function attractionSearch(params) {
     return new Promise((resolve, reject) => {
       let rootUrl = 'https://app.ticketmaster.com/discovery/v2/attractions.json?';
       let url = buildUrl(rootUrl, params);
@@ -58,13 +58,41 @@ var TicketMaster = (function() {
       });
     });
   }
+
+  // Venue search
+  function venueSearch(params) {
+    return new Promise((resolve, reject) => {
+      let rootUrl = 'https://app.ticketmaster.com/discovery/v2/venues.json?';
+      let url = buildUrl(rootUrl, params);
+      $.ajax({
+        type: 'GET',
+        url: url,
+        async: true,
+        dataType: 'json',
+        success: function(json) {
+          resolve(json);
+        },
+        error: function(xhr, status, err) {
+          reject(err);
+        }
+      });
+    });
+  }
+
   return {
     eventSearch: eventSearch,
-    artistSearch: artistSearch
+    attractionSearch: attractionSearch,
+    venueSearch: venueSearch
   };
 })();
 
+/*
+Example searches below. Refer to the ticketmaster docs for all of the parameter options
+*/
+
+// console.log('Searching for Kings Of Leon events at Philips Arena');
 // TicketMaster.eventSearch({
+//   id: 'KovZpa2Xke',
 //   keyword: 'kings of leon',
 //   size: 5
 // })
@@ -75,14 +103,25 @@ var TicketMaster = (function() {
 //     console.log(err);
 //   });
 
-console.log('Searching for artist...');
-TicketMaster.artistSearch({
-  keyword: 'Group love',
-  size: 5
-})
-  .then(function(json) {
-    console.log(json);
-  })
-  .catch(function(err) {
-    console.log(err);
-  });
+// console.log('Searching for artist...');
+// TicketMaster.artistSearch({
+//   keyword: 'Group love',
+//   size: 5
+// })
+//   .then(function(json) {
+//     console.log(json);
+//   })
+//   .catch(function(err) {
+//     console.log(err);
+//   });
+
+// console.log('Searching for venue..');
+// TicketMaster.venueSearch({
+//   keyword: 'Philips Arena'
+// })
+//   .then(function(json) {
+//     console.log(json);
+//   })
+//   .catch(function(err) {
+//     console.log(err);
+//   });
