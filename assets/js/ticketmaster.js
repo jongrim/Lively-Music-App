@@ -8,7 +8,7 @@ var TicketMaster = (function() {
     for (var n in params) {
       if (params.hasOwnProperty(n)) {
         if (typeof params[n] === 'string') {
-          params[n] = params[n].replace(/ /g, '%20');
+          params[n] = params[n].replace(/ /g, '+');
         }
         rootUrl += `&${n}=${params[n]}`;
       }
@@ -40,13 +40,44 @@ var TicketMaster = (function() {
   }
 
   // Artist search
+  function artistSearch(params) {
+    return new Promise((resolve, reject) => {
+      let rootUrl = 'https://app.ticketmaster.com/discovery/v2/attractions.json?';
+      let url = buildUrl(rootUrl, params);
+      $.ajax({
+        type: 'GET',
+        url: url,
+        async: true,
+        dataType: 'json',
+        success: function(json) {
+          resolve(json);
+        },
+        error: function(xhr, status, err) {
+          reject(err);
+        }
+      });
+    });
+  }
   return {
-    eventSearch: eventSearch
+    eventSearch: eventSearch,
+    artistSearch: artistSearch
   };
 })();
 
-TicketMaster.eventSearch({
-  keyword: 'kings of leon',
+// TicketMaster.eventSearch({
+//   keyword: 'kings of leon',
+//   size: 5
+// })
+//   .then(function(json) {
+//     console.log(json);
+//   })
+//   .catch(function(err) {
+//     console.log(err);
+//   });
+
+console.log('Searching for artist...');
+TicketMaster.artistSearch({
+  keyword: 'Group love',
   size: 5
 })
   .then(function(json) {
