@@ -79,22 +79,52 @@
 				<h3>Trending</h1>
 			</div>
 			<div class="col-xs-3">
-				<h4>Trending Artist 1</h1>
+				<h4 id="trending-1">Trending Artist 1</h1>
 			</div>
 			<div class="col-xs-3">
-				<h4>Trending Artist 2</h1>
+				<h4 id="trending-2">Trending Artist 2</h1>
 			</div>
 			<div class="col-xs-3">
-				<h4>Trending Artist 3</h1>
+				<h4 id="trending-3">Trending Artist 3</h1>
 			</div>
 		</div>
 
 		<!-- advanced search -->
 		<div class="row" id="advSearch">
-			<div class="col-xs-12 text-center">
-				<h1>This is where advanced search goes; needs to be a form</h1>
+			<div class="col-xs-12">
+				<h3 class="text-center text-muted">Advanced Search</h3>
+				<form action="">
+					<div class="form-group">
+						<label for="artist">Artist</label>
+						<input type="text" id="artist" class="form-control" placeholder="Artist">
+					</div>
+					<div class="form-group">
+						<label for="venue">Venue</label>
+						<input type="text" id="venue" class="form-control" placeholder="Venue">
+					</div>
+					<div class="form-group">
+						<label for="location">Location (City, State, or Zip)</label>
+						<input type="text" class="form-control" placeholder="Location" id='location'>
+					</div>
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="form-group">
+								<label for="startDate">Start Date</label>
+								<input type="date" class="form-control">
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="form-group">
+								<label for="endDate">End Date</label>
+								<input type="date" class="form-control">
+							</div>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-default btn-sm" id='advSearchBtn'>Search</button>
+				</form>
 			</div>
 		</div>
+		<!-- End of advanced search row -->
 
 		<!-- content (map or carousel) -->
 		<div class="row" id="content">
