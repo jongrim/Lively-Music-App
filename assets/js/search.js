@@ -7,23 +7,27 @@ var Search = (function() {
     $advSearchBtn,
     $advSearchArtist,
     $advSearchVenue,
-    $advSearchLocation,
+    $advSearchCity,
+    $advSearchState,
+    $advSearchZip,
     $advSearchStartDate,
     $advSearchEndDate;
 
   function init() {
     $navbarSearchBtn = $('#navbarSearchBtn');
     $navbarSearchField = $('#navbarSearchText');
-    // $navbarSearchSelector = $('#'); // TODO
-    // $advSearchBtn = $('#'); // TODO
-    // $advSearchArtist = $('#'); // TODO
-    // $advSearchVenue = $('#'); // TODO
-    // $advSearchLocation = $('#'); // TODO
-    // $advSearchStartDate = $('#'); // TODO
-    // $advSearchEndDate = $('#'); // TODO
+    $navbarSearchSelector = $('#navbarSearchType');
+    $advSearchBtn = $('#advSearchBtn');
+    $advSearchArtist = $('#advSearchArtist');
+    $advSearchVenue = $('#advSearchVenue');
+    $advSearchCity = $('#advSearchCity');
+    $advSearchState = $('#advSearchState');
+    $advSearchZip = $('#advSearchZip');
+    $advSearchStartDate = $('#advSearchStartDate');
+    $advSearchEndDate = $('#advSearchEndDate');
 
     $navbarSearchBtn.on('click', navbarSearch);
-    // $advSearchBtn.on('click', advSearch);
+    $advSearchBtn.on('click', advSearch);
   }
 
   function navbarSearch(evt) {
@@ -43,25 +47,37 @@ var Search = (function() {
   function advSearch(evt) {
     evt.preventDefault();
 
-    let artist, venue, location, startDate, endDate;
+    let artist, venue, city, state, zip, location, startDate, endDate;
     artist = $advSearchArtist.val().trim();
     venue = $advSearchVenue.val().trim();
-    location = $advSearchLocation.val();
+    city = $advSearchCity.val().trim();
+    state = $advSearchState.val();
+    zip = $advSearchZip.val().trim();
     startDate = $advSearchStartDate.val();
     endDate = $advSearchEndDate.val();
-    let searchType = evaluateSearchType([artist, venue, location, startDate, endDate]);
+    let searchType = evaluateSearchType([artist, venue, city, state, zip, startDate, endDate]);
     let params = { keyword: '' };
 
     if (artist) {
-      params.keyword += $advSearchArtist.val().trim();
+      params.keyword += artist;
     }
     if (venue) {
-      params.keyword += $advSearchVenue.val().trim();
+      params.keyword += ' ' + venue;
     }
-    if (location) {
-      let geopoint = 'Some google maps call here'; // TODO
-      params.geoPoint = Geohash.encode(geopoint.lat, geopoint.lon);
+    if (city) {
+      params.city = city;
     }
+    if (zip) {
+      params.postalCode = zip;
+    }
+    if (state) {
+      params.stateCode = state;
+    }
+    // saving for if we add a 'use current location' feature
+    // if (location) {
+    //   let geopoint = 'Some google maps call here'; // TODO
+    //   params.geoPoint = Geohash.encode(geopoint.lat, geopoint.lon);
+    // }
     if ($advSearchStartDate.val()) {
       params.startDateTime = $advSearchStartDate.val();
     }
@@ -73,19 +89,22 @@ var Search = (function() {
   }
 
   function evaluateSearchType(searchParams) {
-    let [artist, venue, location, startDate, endDate] = searchParams;
-    let searchType = null;
+    // TODO update with city, state, and zip
+    // let [artist, venue, location, startDate, endDate] = searchParams;
+    // let searchType = null;
 
-    if (artist & !venue & !location & !startDate & !endDate) {
-      searchType = 'artist';
-    } else if (venue & !artist & !location & !startDate & !endDate) {
-      searchType = 'venue';
-    } else if (venue & location & !artist & !startDate & !endDate) {
-      searchType = 'venue';
-    } else {
-      searchType = 'event';
-    }
+    // if (artist & !venue & !location & !startDate & !endDate) {
+    //   searchType = 'artist';
+    // } else if (venue & !artist & !location & !startDate & !endDate) {
+    //   searchType = 'venue';
+    // } else if (venue & location & !artist & !startDate & !endDate) {
+    //   searchType = 'venue';
+    // } else {
+    //   searchType = 'event';
+    // }
 
+    // for now, let's limit search to only events
+    let searchType = 'event';
     return searchType;
   }
 
