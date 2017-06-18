@@ -30,7 +30,7 @@ var App = (function() {
     if (searchType === 'event') {
       TicketMaster.eventSearch(params)
         .then(function(results) {
-          console.log(results);
+          EVT.emit('eventResultsReturned', results);
         })
         .catch(function(err) {
           console.error(err);

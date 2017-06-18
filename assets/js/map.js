@@ -1,11 +1,78 @@
 'use strict';
 
 var GoogleMap = (function() {
-  var $mapContent;
+  var $mapContent, mapMarkers, map, bounds;
 
   function init() {
     $mapContent = $('#content');
     $mapContent.height(window.innerHeight / 2);
+    mapMarkers = [];
+  }
+
+  function processEventResults(json) {
+    console.log('Maps got these results', json);
+    let events = json._embedded.events;
+    let eventObjects = events.map(event => {
+      return {
+        name: event.name,
+        type: event.type,
+        url: event.url,
+        startDate: event.dates.start.localDate,
+        // endDate: null || event.dates.end.localDate, // not reliable
+        venue: {
+          name: event._embedded.venues[0].name,
+          url: event._embedded.venues[0].url,
+          location: event._embedded.venues[0].location
+        }
+      };
+    });
+    console.log(eventObjects);
+    deleteMarkers();
+    makeEventMarkers(eventObjects);
+    setMarkers();
+    resizeMap();
+  }
+
+  function makeEventMarkers(events) {
+    mapMarkers = events.map(event => {
+      let marker = new google.maps.Marker({
+        position: new google.maps.LatLng(Number(event.venue.location.latitude), Number(event.venue.location.longitude))
+        // map: map
+      });
+
+      let infoWindow = new google.maps.InfoWindow({ content: makeEventInfoWindow(event) });
+
+      marker.addListener('click', function() {
+        infoWindow.open(map, marker);
+      });
+      return marker;
+    });
+  }
+
+  function makeEventInfoWindow(event) {
+    return `<h2>${event.name}</h2>`;
+  }
+
+  function setMarkers() {
+    if (mapMarkers.length < 1) {
+      console.error('Nothin in map markers!');
+      return;
+    }
+    mapMarkers.forEach(marker => marker.setMap(map));
+  }
+
+  function deleteMarkers() {
+    if (mapMarkers.length < 1) {
+      return;
+    }
+    mapMarkers.forEach(marker => marker.setMap(null));
+    mapMarkers = [];
+  }
+
+  function resizeMap() {
+    bounds = new google.maps.LatLngBounds();
+    mapMarkers.forEach(marker => bounds.extend(marker.position));
+    map.fitBounds(bounds);
   }
 
   function initMap() {
@@ -18,70 +85,10 @@ var GoogleMap = (function() {
     };
 
     // New map
-    var map = new google.maps.Map(document.getElementById('content'), options);
-
-    // Array of markers
-    var markers = [
-      {
-        coords: { lat: 42.4668, lng: -70.9495 },
-        content: '<h2>Artist One</h2>'
-      },
-      {
-        coords: { lat: 42.8584, lng: -70.93 },
-        content: '<h2>Artist Two</h2>'
-      },
-      {
-        coords: { lat: 42.7762, lng: -71.0773 },
-        content: '<h2>Artist Three</h2>'
-      }
-    ];
-
-    // Lat Lng adjustments
-    var latlngbounds = new google.maps.LatLngBounds();
-
-    // Loop through markers
-    for (var i = 0; i < markers.length; i++) {
-      // Add marker
-      addMarker(markers[i]);
-
-      // Pass on the new lat long to map to extend
-      latlngbounds.extend(markers[i].coords);
-    }
-
-    // Resize map
-    map.fitBounds(latlngbounds);
-
-    // Add Marker Function
-    function addMarker(props) {
-      var marker = new google.maps.Marker({
-        // position:props.coords,
-        position: props.coords,
-
-        // console.log(props.coords);
-        map: map
-
-        //icon:props.iconImage
-      });
-
-      // Check for customicon
-      if (props.iconImage) {
-        // Set icon image
-        marker.setIcon(props.iconImage);
-      }
-
-      // Check content - We can add content to the Marker in Here
-      if (props.content) {
-        var infoWindow = new google.maps.InfoWindow({
-          content: props.content
-        });
-
-        marker.addListener('click', function() {
-          infoWindow.open(map, marker);
-        });
-      }
-    }
+    map = new google.maps.Map(document.getElementById('content'), options);
   }
   EVT.on('init', init);
+  EVT.on('eventResultsReturned', processEventResults);
 
   return {
     initMap: initMap
