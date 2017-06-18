@@ -18,7 +18,6 @@ var GoogleMap = (function() {
         type: event.type,
         url: event.url,
         startDate: event.dates.start.localDate,
-        // endDate: null || event.dates.end.localDate, // not reliable
         venue: {
           name: event._embedded.venues[0].name,
           url: event._embedded.venues[0].url,
@@ -58,7 +57,7 @@ var GoogleMap = (function() {
   }
 
   function makeEventInfoWindow(event) {
-    return `<h2>${event.name}</h2>`;
+    return `<h5 class='text-center'>${event.name}</h5>`;
   }
 
   function setMarkers() {
