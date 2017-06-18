@@ -34,19 +34,27 @@ var GoogleMap = (function() {
   }
 
   function makeEventMarkers(events) {
-    mapMarkers = events.map(event => {
-      let marker = new google.maps.Marker({
-        position: new google.maps.LatLng(Number(event.venue.location.latitude), Number(event.venue.location.longitude))
-        // map: map
-      });
+    mapMarkers = events
+      .filter(event => {
+        if (event.venue.location) {
+          return event;
+        }
+      })
+      .map(event => {
+        let marker = new google.maps.Marker({
+          position: new google.maps.LatLng(
+            Number(event.venue.location.latitude),
+            Number(event.venue.location.longitude)
+          )
+        });
 
-      let infoWindow = new google.maps.InfoWindow({ content: makeEventInfoWindow(event) });
+        let infoWindow = new google.maps.InfoWindow({ content: makeEventInfoWindow(event) });
 
-      marker.addListener('click', function() {
-        infoWindow.open(map, marker);
+        marker.addListener('click', function() {
+          infoWindow.open(map, marker);
+        });
+        return marker;
       });
-      return marker;
-    });
   }
 
   function makeEventInfoWindow(event) {
