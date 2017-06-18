@@ -26,7 +26,7 @@ var App = (function() {
   }
 
   function executeSearch(searchType, params) {
-    console.log(params);
+    // for now, everything points to an event search
     if (searchType === 'event') {
       TicketMaster.eventSearch(params)
         .then(function(results) {
@@ -36,7 +36,7 @@ var App = (function() {
           console.error(err);
         });
     } else if (searchType === 'artist') {
-      TicketMaster.artistSearch(params)
+      TicketMaster.eventSearch(params)
         .then(function(results) {
           console.log(results);
         })
@@ -44,7 +44,7 @@ var App = (function() {
           console.error(err);
         });
     } else if (searchType === 'venue') {
-      TicketMaster.venueSearch(params)
+      TicketMaster.eventSearch(params)
         .then(function(results) {
           console.log(results);
         })
