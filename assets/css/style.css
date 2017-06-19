@@ -6,11 +6,27 @@ html {
 body {
   padding-top: 51px;
   margin-bottom: 60px;
+  overflow-x: hidden;
 }
 
 #trendBar {
-  background-color: #222222;
-  color: #ffffff;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  animation: marquee 35s linear infinite;
+}
+
+#trendBar:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 footer {

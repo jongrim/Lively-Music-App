@@ -7,7 +7,6 @@ var GoogleMap = (function() {
     $mapContent = $('#content');
     $mapContent.height(window.innerHeight / 2);
     mapMarkers = [];
-    infoWindow = new google.maps.InfoWindow({});
   }
 
   function processEventResults(json) {
@@ -110,6 +109,7 @@ var GoogleMap = (function() {
 
     // New map
     map = new google.maps.Map(document.getElementById('content'), options);
+    infoWindow = new google.maps.InfoWindow({});
   }
   EVT.on('init', init);
   EVT.on('eventResultsReturned', processEventResults);
