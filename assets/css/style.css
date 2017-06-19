@@ -9,6 +9,10 @@ body {
   overflow-x: hidden;
 }
 
+#advSearch {
+  margin-bottom: 15px;
+}
+
 #trendBar {
   overflow: hidden;
   white-space: nowrap;
