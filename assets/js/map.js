@@ -19,6 +19,7 @@ var GoogleMap = (function() {
         type: event.type,
         url: event.url,
         startDate: event.dates.start.localDate,
+        image: event.images[2].url,
         venue: {
           name: event._embedded.venues[0].name,
           url: event._embedded.venues[0].url,
@@ -58,7 +59,22 @@ var GoogleMap = (function() {
   }
 
   function makeEventInfoWindow(event) {
-    return `<div class="infoWindow"><h5 class='text-center'>${event.name}</h5></div>`;
+    return (
+      `<div class="row infoWindow">` +
+      `<div class="col-xs-12">` +
+      `<div class="thumbnail">` +
+      `<h5 class="text-center" id='eventName'>${event.name}</h5>` +
+      `<img id='eventImage' src="${event.image}" alt="Image provided by Ticketmaster">` +
+      `<div class="caption">` +
+      `<div class="text-center">` +
+      `<p id='startDate'><strong>Date:</strong> ${event.startDate}</p>` +
+      `<p id='url'><a href="${event.url}">Ticketmaster Link</a></p>` +
+      `</div>` +
+      `</div>` +
+      `</div>` +
+      `</div>` +
+      `</div>`
+    );
   }
 
   function setMarkers() {
