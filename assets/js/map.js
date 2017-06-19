@@ -1,12 +1,13 @@
 'use strict';
 
 var GoogleMap = (function() {
-  var $mapContent, mapMarkers, map, bounds;
+  var $mapContent, mapMarkers, map, bounds, infoWindow;
 
   function init() {
     $mapContent = $('#content');
     $mapContent.height(window.innerHeight / 2);
     mapMarkers = [];
+    infoWindow = new google.maps.InfoWindow({});
   }
 
   function processEventResults(json) {
@@ -47,9 +48,9 @@ var GoogleMap = (function() {
           )
         });
 
-        let infoWindow = new google.maps.InfoWindow({ content: makeEventInfoWindow(event) });
-
         marker.addListener('click', function() {
+          infoWindow.close();
+          infoWindow.setContent(makeEventInfoWindow(event));
           infoWindow.open(map, marker);
         });
         return marker;
@@ -57,7 +58,7 @@ var GoogleMap = (function() {
   }
 
   function makeEventInfoWindow(event) {
-    return `<h5 class='text-center'>${event.name}</h5>`;
+    return `<div class="infoWindow"><h5 class='text-center'>${event.name}</h5></div>`;
   }
 
   function setMarkers() {
