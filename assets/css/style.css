@@ -5,7 +5,7 @@ html {
 
 body {
   padding-top: 51px;
-  margin-bottom: 60px;
+  margin-bottom: 120px;
   overflow-x: hidden;
 }
 
@@ -31,18 +31,17 @@ body {
 
 footer {
   margin-top: 55px;
+  padding-bottom: 15px;
   border-top: 1px solid #dbdbdb;
   position: absolute;
   bottom: 0;
-  height: 60px;
-  /*background-color: #222222;*/
+  height: 120px;
   width: 100%;
-  /*font-family: 'Lobster', cursive;*/
-  font-weight: 200;
 }
 
-footer * {
-  margin-bottom: 0;
+.brandFont {
+  font-family: 'Lobster', cursive;
+  color: #F86D13;
 }
 
 .navbar-brand, #brandLetter {
@@ -78,4 +77,8 @@ footer * {
 
 a:hover {
   cursor: pointer;
+}
+
+.socialMediaIcon {
+  max-width: 16px;
 }
