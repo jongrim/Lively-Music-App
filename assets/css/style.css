@@ -9,6 +9,16 @@ body {
   overflow-x: hidden;
 }
 
+.searchBtn {
+  background-color: #1A51A3;
+  border-color: #1A51A3;
+}
+
+.searchBtn:hover, .searchBtn:focus {
+  background-color: #082E67;
+  border-color: #082E67;
+}
+
 #advSearch {
   margin-bottom: 15px;
 }
