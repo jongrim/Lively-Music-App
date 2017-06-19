@@ -9,8 +9,10 @@
 	<title>Lively Music App</title>
 
 	<!-- Bootstrap -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./assets/css/cosmo.css">
 	<link rel="stylesheet" href="./assets/css/style.css">
+
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	 crossorigin="anonymous"></script>
@@ -49,26 +51,23 @@
         <span class="icon-bar"></span>
       </button>
 				<!-- Brand Image Goes Here -->
-				<a class="navbar-brand" href="#"><img src="#" alt="Brand Image Go Here"></a>
+				<p class="navbar-brand" id="brandLetter">L</p>
 			</div>
 
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a id="trendingSelector">Trending</a></li>
-				</ul>
 				<form class="navbar-form navbar-right">
 					<div class="form-group">
-						<div class="form-group">
-							<select name="searchType" id="navbarSearchType" class="form-control input-sm">
-							<option value="artist">Artist</option>
-							<option value="event" selected>Event</option>
-							<option value="venue">Venue</option>
-						</select>
-						</div>
-						<input type="text" class="form-control" placeholder="Search keywords" id='navbarSearchText'>
+						<!--<div class="form-group">
+							<select name="searchType" id="navbarSearchType" class="form-control btn btn-default">
+								<option value="artist">Artist</option>
+								<option value="event" selected>Event</option>
+								<option value="venue">Venue</option>
+							</select>
+						</div>-->
+						<input type="text" class="form-control" placeholder="Search Events" id='navbarSearchText'>
 					</div>
-					<button type="submit" class="btn btn-default btn-sm" id='navbarSearchBtn'>Search</button>
+					<button type="submit" class="btn btn-primary" id='navbarSearchBtn'>Search</button>
 				</form>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a id="advSearchToggle">Advanced Search</a></li>
@@ -88,16 +87,16 @@
 		<!-- trending bar, info stored by firebase-->
 		<div class="row" id="trendBar">
 			<div class="col-xs-3">
-				<h3>Trending</h1>
+				<h4>Trending</h4>
 			</div>
 			<div class="col-xs-3">
-				<h4 id="trending-1">Trending Artist 1</h1>
+				<h4 id="trending-1">Trending Artist 1</h4>
 			</div>
 			<div class="col-xs-3">
-				<h4 id="trending-2">Trending Artist 2</h1>
+				<h4 id="trending-2">Trending Artist 2</h4>
 			</div>
 			<div class="col-xs-3">
-				<h4 id="trending-3">Trending Artist 3</h1>
+				<h4 id="trending-3">Trending Artist 3</h4>
 			</div>
 		</div>
 
@@ -216,15 +215,105 @@
 
 		<!-- overflow content (map data table) -->
 		<div class="row" id="overflowContent">
-			<div class="col-xs-12 text-center">
-				<h1>Overflow content (data table)</h1>
-
-
-				<h1>Overflow content (data table)</h1>
-
-				<h1>Overflow content (data table)</h1>
-
-				<h1>Overflow content (data table)</h1>
+			<div class="col-xs-12">
+				<table class="table table-condensed table-hover" id="overflowContentTable">
+					<tr>
+						<th class="text-center">Event</th>
+						<th class="text-center">Attraction</th>
+						<th class="text-center">Date</th>
+						<th class="text-center">Venue</th>
+					</tr>
+					<tr>
+						<td>Lorem ipsum dolor sit amet.</td>
+						<td>Dignissimos delectus, voluptatibus dolores enim.</td>
+						<td>Unde sed, repudiandae aspernatur tenetur?</td>
+						<td>Facilis mollitia ullam, debitis quas.</td>
+					</tr>
+					<tr>
+						<td>Lorem ipsum dolor sit amet.</td>
+						<td>Delectus aspernatur molestiae quae, atque.</td>
+						<td>Hic saepe, ut ipsum odio.</td>
+						<td>Nostrum excepturi, eos voluptatibus quaerat!</td>
+					</tr>
+					<tr>
+						<td>Lorem ipsum dolor sit amet.</td>
+						<td>Incidunt fugiat aut a, soluta.</td>
+						<td>Voluptatum alias blanditiis numquam illum.</td>
+						<td>Repellendus pariatur laboriosam vel numquam.</td>
+					</tr>
+					<tr>
+						<td>Lorem ipsum dolor sit amet.</td>
+						<td>Sint vitae, itaque deserunt explicabo.</td>
+						<td>Incidunt optio nisi eius a.</td>
+						<td>Officia, dolorem! Id perspiciatis, aliquam.</td>
+					</tr>
+					<tr>
+						<td>Lorem ipsum dolor sit amet.</td>
+						<td>Fuga sapiente maxime veniam corrupti.</td>
+						<td>Earum, quasi blanditiis deleniti facere.</td>
+						<td>Fugit, ut sequi ab odit?</td>
+					</tr>
+					<tr>
+						<td>Lorem ipsum dolor sit amet.</td>
+						<td>Harum cupiditate architecto, possimus dolorem.</td>
+						<td>Necessitatibus magni obcaecati fuga sit.</td>
+						<td>Magnam sequi, quasi. Quo, exercitationem.</td>
+					</tr>
+					<tr>
+						<td>Lorem ipsum dolor sit amet.</td>
+						<td>Fuga molestias, ipsam dolores nesciunt.</td>
+						<td>Doloremque quos nisi, dolorem reiciendis?</td>
+						<td>Numquam optio iste nesciunt. Laborum!</td>
+					</tr>
+					<tr>
+						<td>Lorem ipsum dolor sit amet.</td>
+						<td>Omnis modi debitis, nisi ipsam.</td>
+						<td>Id earum velit, quisquam praesentium.</td>
+						<td>Tenetur perspiciatis eligendi nostrum, voluptates.</td>
+					</tr>
+					<tr>
+						<td>Lorem ipsum dolor sit amet.</td>
+						<td>Sint neque, asperiores voluptatibus provident!</td>
+						<td>Reprehenderit nulla ipsam animi quo.</td>
+						<td>Cumque id, eveniet nemo ab?</td>
+					</tr>
+					<tr>
+						<td>Lorem ipsum dolor sit amet.</td>
+						<td>Sapiente vel dicta ratione, recusandae.</td>
+						<td>Quae quia blanditiis cumque earum?</td>
+						<td>Recusandae, voluptatem. Laudantium, accusantium, quibusdam.</td>
+					</tr>
+					<tr>
+						<td>Lorem ipsum dolor sit amet.</td>
+						<td>Ut saepe laudantium illum soluta.</td>
+						<td>Veniam ratione adipisci perferendis natus.</td>
+						<td>Accusamus illum sit, ex laborum.</td>
+					</tr>
+					<tr>
+						<td>Lorem ipsum dolor sit amet.</td>
+						<td>Odit velit et delectus error.</td>
+						<td>Odit error quisquam, sapiente id!</td>
+						<td>Esse numquam tenetur veniam, adipisci.</td>
+					</tr>
+					<tr>
+						<td>Lorem ipsum dolor sit amet.</td>
+						<td>Ipsa autem vitae, quasi sunt.</td>
+						<td>Illum laborum repellat alias, temporibus!</td>
+						<td>Accusamus, molestias corrupti sequi id.</td>
+					</tr>
+					<tr>
+						<td>Lorem ipsum dolor sit amet.</td>
+						<td>Doloribus quaerat iusto beatae, magnam.</td>
+						<td>Laudantium veritatis nulla sunt porro.</td>
+						<td>Quasi, laborum in magni fugit.</td>
+					</tr>
+					<tr>
+						<td>Lorem ipsum dolor sit amet.</td>
+						<td>Debitis voluptatem tenetur animi sequi?</td>
+						<td>Aperiam eaque cumque saepe quibusdam!</td>
+						<td>Illum doloremque aliquid ab fugit.</td>
+					</tr>
+				</table>
 
 
 			</div>
@@ -239,10 +328,12 @@
 	<footer>
 		<div class="container-fluid">
 			<div class="row">
-				<p>sticky footer</p>
-			</div>
-			<div class="row text-center">
-				<p>Lively Music App</p>
+				<div class="col-xs-6 col-sm-4">
+
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<h3 class="text-center">Lively Music App</h3>
+				</div>
 			</div>
 		</div>
 	</footer>

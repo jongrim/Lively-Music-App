@@ -5,14 +5,31 @@ html {
 
 body {
   padding-top: 55px;
+  margin-bottom: 60px;
 }
 
 footer {
+  margin-top: 55px;
+  border-top: 1px solid #dbdbdb;
   position: absolute;
   bottom: 0;
   height: 60px;
-  background-color: #f5f5f5;
+  /*background-color: #222222;*/
   width: 100%;
+  /*font-family: 'Lobster', cursive;*/
+  font-weight: 200;
+}
+
+footer * {
+  margin-bottom: 0;
+}
+
+.navbar-brand, #brandLetter {
+  font-family: 'Lobster', cursive;
+  color: #F86D13;
+  font-size: 32px;
+  margin-bottom: 0;
+  padding-top: 12px;
 }
 
 .isHidden {
