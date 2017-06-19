@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="./assets/css/style.css">
 
 	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	 crossorigin="anonymous"></script>
@@ -77,6 +78,24 @@
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
+
+	<div class="jumbotron introTron">
+		<h1><span class="brandFont brandOrange">Lively</span> events</h1>
+		<p>Live more musically</p>
+		<p>Start now</p>
+		<label for="introSearch">Search Events</label>
+		<form action="#" class="form-inline">
+			<div class="form-group">
+				<input type="text" class="form-control" id="introSearch" placeholder="Search events">
+			</div>
+			<button type="submit" class="btn btn-primary searchBtn">Search</button>
+		</form>
+	</div>
+
+	<div class="jumbotron trendingTron">
+		<h3 class="text-right">What Users Are Searching For</h3>
+		<h1 class="text-right brandFont" id="trendingAttraction"><span class="brandOrange">Beyonce</span></h1>
+	</div>
 
 
 	<!-- container fluid-->
@@ -191,14 +210,13 @@
 		<!-- End of advanced search row -->
 
 		<!-- content (map or carousel) -->
-		<div class="row" id="content">
-			<div class="col-xs-12 text-center">
-				<h1>Google Maps here</h1>
+		<div class="row isHidden" id="content">
+			<div class="col-xs-12">
 			</div>
 		</div>
 
 		<!-- trending bar, info stored by firebase-->
-		<div class="row" id="trendBar">
+		<div class="row isHidden" id="trendBar">
 			<div class="col-xs-3">
 				<h4>What users are searching...</h4>
 			</div>
@@ -214,7 +232,7 @@
 		</div>
 
 		<!-- overflow content (map data table) -->
-		<div class="row" id="overflowContent">
+		<div class="row isHidden" id="overflowContent">
 			<div class="col-xs-12">
 				<table class="table table-hover" id="overflowContentTable">
 					<tr>
@@ -329,7 +347,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-6 col-sm-4">
-					<h4 class="brandFont">Lively Music App</h4>
+					<h4 class="brandFont brandOrange">Lively Music App</h4>
 				</div>
 			</div>
 			<div class="row">

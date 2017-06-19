@@ -7,7 +7,12 @@ body {
   padding-top: 51px;
   margin-bottom: 120px;
   overflow-x: hidden;
+  font-family: 'Raleway', 'Segoe UI', sans-serif;
 }
+
+/****
+Forms
+****/
 
 .searchBtn {
   background-color: #1A51A3;
@@ -22,6 +27,10 @@ body {
 #advSearch {
   margin-bottom: 15px;
 }
+
+/**************
+Maruee trendbar
+**************/
 
 #trendBar {
   overflow: hidden;
@@ -43,6 +52,10 @@ body {
   }
 }
 
+/*****
+Footer
+*****/
+
 footer {
   margin-top: 55px;
   padding-bottom: 15px;
@@ -53,9 +66,16 @@ footer {
   width: 100%;
 }
 
+/***************
+Branding classes
+***************/
+
+.brandOrange {
+  color: #F86D13;
+}
+
 .brandFont {
   font-family: 'Lobster', cursive;
-  color: #F86D13;
 }
 
 .navbar-brand, #brandLetter {
@@ -66,9 +86,42 @@ footer {
   padding-top: 12px;
 }
 
+/**************************************
+Jumbotron styling for initial page load
+**************************************/
+.jumbotron {
+  margin-bottom: 0;
+}
+
+.introTron {
+  background-color: #FFC96D;
+  padding-left: 4em;
+}
+
+.trendingTron {
+  background-color: transparent;
+  padding-right: 4em;
+}
+
+/**************
+Utility classes
+**************/
+
 .isHidden {
   display: none;
 }
+
+a:hover {
+  cursor: pointer;
+}
+
+.socialMediaIcon {
+  max-width: 16px;
+}
+
+/******************
+Google maps styling
+******************/
 
 .infoWindow {
   margin: 0;
@@ -87,12 +140,4 @@ footer {
 
 .infoWindow ul, ol {
   list-style: none;
-}
-
-a:hover {
-  cursor: pointer;
-}
-
-.socialMediaIcon {
-  max-width: 16px;
 }
