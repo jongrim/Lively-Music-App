@@ -4,8 +4,13 @@ html {
 }
 
 body {
-  padding-top: 55px;
+  padding-top: 51px;
   margin-bottom: 60px;
+}
+
+#trendBar {
+  background-color: #222222;
+  color: #ffffff;
 }
 
 footer {
