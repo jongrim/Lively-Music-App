@@ -1,12 +1,13 @@
 'use strict';
 
 var GoogleMap = (function() {
-  var $mapContent, mapMarkers, map, bounds;
+  var $mapContent, mapMarkers, map, bounds, infoWindow;
 
   function init() {
     $mapContent = $('#content');
     $mapContent.height(window.innerHeight / 2);
     mapMarkers = [];
+    infoWindow = new google.maps.InfoWindow({});
   }
 
   function processEventResults(json) {
@@ -18,7 +19,7 @@ var GoogleMap = (function() {
         type: event.type,
         url: event.url,
         startDate: event.dates.start.localDate,
-        // endDate: null || event.dates.end.localDate, // not reliable
+        image: event.images[2].url,
         venue: {
           name: event._embedded.venues[0].name,
           url: event._embedded.venues[0].url,
@@ -34,23 +35,46 @@ var GoogleMap = (function() {
   }
 
   function makeEventMarkers(events) {
-    mapMarkers = events.map(event => {
-      let marker = new google.maps.Marker({
-        position: new google.maps.LatLng(Number(event.venue.location.latitude), Number(event.venue.location.longitude))
-        // map: map
-      });
+    mapMarkers = events
+      .filter(event => {
+        if (event.venue.location) {
+          return event;
+        }
+      })
+      .map(event => {
+        let marker = new google.maps.Marker({
+          position: new google.maps.LatLng(
+            Number(event.venue.location.latitude),
+            Number(event.venue.location.longitude)
+          )
+        });
 
-      let infoWindow = new google.maps.InfoWindow({ content: makeEventInfoWindow(event) });
-
-      marker.addListener('click', function() {
-        infoWindow.open(map, marker);
+        marker.addListener('click', function() {
+          infoWindow.close();
+          infoWindow.setContent(makeEventInfoWindow(event));
+          infoWindow.open(map, marker);
+        });
+        return marker;
       });
-      return marker;
-    });
   }
 
   function makeEventInfoWindow(event) {
-    return `<h2>${event.name}</h2>`;
+    return (
+      `<div class="row infoWindow">` +
+      `<div class="col-xs-12">` +
+      `<div class="thumbnail">` +
+      `<h5 class="text-center" id='eventName'>${event.name}</h5>` +
+      `<img id='eventImage' src="${event.image}" alt="Image provided by Ticketmaster">` +
+      `<div class="caption">` +
+      `<div class="text-center">` +
+      `<p id='startDate'><strong>Date:</strong> ${event.startDate}</p>` +
+      `<p id='url'><a href="${event.url}">Ticketmaster Link</a></p>` +
+      `</div>` +
+      `</div>` +
+      `</div>` +
+      `</div>` +
+      `</div>`
+    );
   }
 
   function setMarkers() {

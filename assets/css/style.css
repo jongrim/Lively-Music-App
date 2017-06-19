@@ -19,6 +19,25 @@ footer {
   display: none;
 }
 
+.infoWindow {
+  margin: 0;
+}
+
+.infoWindow .thumbnail {
+  border: none;
+  margin-bottom: 0;
+  overflow-x: hidden;
+  max-width: 300px;
+}
+
+.infoWindow #eventImage {
+  max-width: 250px;
+}
+
+.infoWindow ul, ol {
+  list-style: none;
+}
+
 a:hover {
   cursor: pointer;
 }
