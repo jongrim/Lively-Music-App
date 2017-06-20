@@ -15,6 +15,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 
+	<!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+	 crossorigin="anonymous"></script>-->
+
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	 crossorigin="anonymous"></script>
 
@@ -88,13 +91,13 @@
 			<div class="form-group">
 				<input type="text" class="form-control" id="introSearch" placeholder="Search events">
 			</div>
-			<button type="submit" class="btn btn-primary searchBtn">Search</button>
+			<button type="submit" class="btn btn-primary searchBtn" id="introSearchBtn">Search</button>
 		</form>
 	</div>
 
 	<div class="jumbotron trendingTron">
 		<h3 class="text-right">What Users Are Searching For</h3>
-		<h1 class="text-right brandFont" id="trendingAttraction"><span class="brandOrange">Beyonce</span></h1>
+		<h1 class="text-right brandFont"><span class="brandOrange" id="trendingAttraction"></span></h1>
 	</div>
 
 
@@ -120,13 +123,13 @@
 						<div class="col-xs-12 col-sm-4">
 							<div class="form-group">
 								<label for="advSearchCity">City</label>
-								<input type="text" class="form-control" placeholder="City" id='advSearchCity'>
+								<input rel='locationField' type="text" class="form-control" placeholder="City" id='advSearchCity'>
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-4">
 							<div class="form-group">
 								<label for="advSearchState">State</label>
-								<select id='advSearchState' class="form-control">
+								<select rel='locationField' id='advSearchState' class="form-control">
 									<option value="">Not selected</option>
 									<option value="AL">Alabama</option>
 									<option value="AK">Alaska</option>
@@ -185,8 +188,13 @@
 						<div class="col-xs-12 col-sm-4">
 							<div class="form-group">
 								<label for="advSearchZip">Zip Code</label>
-								<input type="text" class="form-control" placeholder="Zip Code" id='advSearchZip'>
+								<input rel='locationField' type="text" class="form-control" placeholder="Zip Code" id='advSearchZip'>
 							</div>
+						</div>
+						<div class="col-xs-12 col-sm-4">
+							<input type="checkbox" class="toggle-input cmn-toggle-round-flat" id="currentLocationToggle" disabled>
+							<label for="currentLocationToggle" class="pull-left"></label>
+							<p class="currentLocationToggleLabel">Use Current Location</p>
 						</div>
 					</div>
 					<div class="row">

@@ -10,10 +10,18 @@ var Search = (function() {
     $advSearchCity,
     $advSearchState,
     $advSearchZip,
+    $advSearchLocationToggle,
     $advSearchStartDate,
-    $advSearchEndDate;
+    $advSearchEndDate,
+    $advForm,
+    $advFormToggleLink,
+    $introSearchBtn,
+    $introSearchField,
+    userGeohash;
 
   function init() {
+    $introSearchField = $('#introSearch');
+    $introSearchBtn = $('#introSearchBtn');
     $navbarSearchBtn = $('#navbarSearchBtn');
     $navbarSearchField = $('#navbarSearchText');
     $navbarSearchSelector = $('#navbarSearchType');
@@ -23,17 +31,49 @@ var Search = (function() {
     $advSearchCity = $('#advSearchCity');
     $advSearchState = $('#advSearchState');
     $advSearchZip = $('#advSearchZip');
+    $advSearchLocationToggle = $('#currentLocationToggle');
     $advSearchStartDate = $('#advSearchStartDate');
     $advSearchEndDate = $('#advSearchEndDate');
+    $advForm = $('#advSearch');
+    $advFormToggleLink = $('#advSearchToggle');
 
+    $advFormToggleLink.on('click', toggleAdvSearchForm);
     $navbarSearchBtn.on('click', navbarSearch);
     $advSearchBtn.on('click', advSearch);
+    $introSearchBtn.on('click', introTronSearch);
+    $advSearchLocationToggle.on('click', toggleAdvSearchLocationFields);
+  }
+
+  function toggleAdvSearchLocationFields() {
+    if ($advSearchCity.prop('disabled')) {
+      $("[rel='locationField']").each(function() {
+        $(this).prop('disabled', false);
+      });
+    } else {
+      $("[rel='locationField']").each(function() {
+        $(this).prop('disabled', true);
+      });
+    }
+  }
+
+  function toggleAdvSearchForm() {
+    $advForm.slideToggle();
+  }
+
+  function introTronSearch(evt) {
+    evt.preventDefault();
+    if (!$introSearchField.val().trim()) {
+      resetSearchForms();
+      return;
+    }
+    let searchInput = $introSearchField.val().trim();
+    EVT.emit('search', 'event', { keyword: searchInput });
   }
 
   function navbarSearch(evt) {
     evt.preventDefault();
-
     if (!$navbarSearchField.val().trim()) {
+      resetSearchForms();
       return;
     }
     let searchInput = $navbarSearchField.val().trim();
@@ -46,6 +86,7 @@ var Search = (function() {
 
   function advSearch(evt) {
     evt.preventDefault();
+    toggleAdvSearchForm();
 
     let artist, venue, city, state, zip, location, startDate, endDate;
     artist = $advSearchArtist.val().trim();
@@ -53,6 +94,7 @@ var Search = (function() {
     city = $advSearchCity.val().trim();
     state = $advSearchState.val();
     zip = $advSearchZip.val().trim();
+    location = $('#currentLocationToggle').prop('checked');
     startDate = $advSearchStartDate.val();
     endDate = $advSearchEndDate.val();
     let searchType = evaluateSearchType([artist, venue, city, state, zip, startDate, endDate]);
@@ -73,11 +115,10 @@ var Search = (function() {
     if (state) {
       params.stateCode = state;
     }
-    // saving for if we add a 'use current location' feature
-    // if (location) {
-    //   let geopoint = 'Some google maps call here'; // TODO
-    //   params.geoPoint = Geohash.encode(geopoint.lat, geopoint.lon);
-    // }
+
+    if (location) {
+      params.geoPoint = userGeohash;
+    }
     if ($advSearchStartDate.val()) {
       params.startDateTime = $advSearchStartDate.val();
     }
@@ -86,6 +127,18 @@ var Search = (function() {
     }
 
     EVT.emit('search', searchType, params);
+  }
+
+  function resetSearchForms() {
+    $introSearchField.val('');
+    $navbarSearchField.val('');
+    $advSearchArtist.val('');
+    $advSearchVenue.val('');
+    $advSearchCity.val('');
+    $advSearchState.val('');
+    $advSearchZip.val('');
+    $advSearchStartDate.val('');
+    $advSearchEndDate.val('');
   }
 
   function evaluateSearchType(searchParams) {
@@ -108,5 +161,17 @@ var Search = (function() {
     return searchType;
   }
 
+  function setCurrentLocation(geoPoint) {
+    userGeohash = geoPoint;
+    $advSearchLocationToggle.prop('disabled', false);
+    console.log('User location stored as', geoPoint);
+  }
+
   EVT.on('init', init);
+  EVT.on('setUserLocation', setCurrentLocation);
+  EVT.on('search', resetSearchForms);
+
+  return {
+    setCurrentLocation: setCurrentLocation
+  };
 })();
