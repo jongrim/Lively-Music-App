@@ -121,7 +121,7 @@ var GoogleMap = (function() {
     infoWindow = new google.maps.InfoWindow({});
   }
   EVT.on('init', init);
-  EVT.on('eventResultsReturned', processEventResults);
+  EVT.on('resultsValid', processEventResults);
 
   return {
     initMap: initMap
