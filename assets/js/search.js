@@ -17,7 +17,7 @@ var Search = (function() {
     $advFormToggleLink,
     $introSearchBtn,
     $introSearchField,
-    currentLocation;
+    userGeohash;
 
   function init() {
     $introSearchField = $('#introSearch');
@@ -94,6 +94,7 @@ var Search = (function() {
     city = $advSearchCity.val().trim();
     state = $advSearchState.val();
     zip = $advSearchZip.val().trim();
+    location = $('#currentLocationToggle').prop('checked');
     startDate = $advSearchStartDate.val();
     endDate = $advSearchEndDate.val();
     let searchType = evaluateSearchType([artist, venue, city, state, zip, startDate, endDate]);
@@ -114,11 +115,10 @@ var Search = (function() {
     if (state) {
       params.stateCode = state;
     }
-    // saving for if we add a 'use current location' feature
-    // if (location) {
-    //   let geopoint = 'Some google maps call here'; // TODO
-    //   params.geoPoint = Geohash.encode(geopoint.lat, geopoint.lon);
-    // }
+
+    if (location) {
+      params.geoPoint = userGeohash;
+    }
     if ($advSearchStartDate.val()) {
       params.startDateTime = $advSearchStartDate.val();
     }
@@ -162,8 +162,9 @@ var Search = (function() {
   }
 
   function setCurrentLocation(geoPoint) {
-    currentLocation = geoPoint;
-    console.log('User location stored as ', geoPoint);
+    userGeohash = geoPoint;
+    $advSearchLocationToggle.prop('disabled', false);
+    console.log('User location stored as', geoPoint);
   }
 
   EVT.on('init', init);

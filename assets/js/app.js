@@ -10,7 +10,7 @@ var App = (function() {
     $trendingAttraction = $('#trendingAttraction');
 
     updateTrending();
-    trendingInterval = setInterval(updateTrending, 6000);
+    trendingInterval = setInterval(updateTrending, 3000);
   }
 
   function updateTrending() {
