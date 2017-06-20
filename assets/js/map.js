@@ -27,7 +27,7 @@ var GoogleMap = (function() {
         }
       };
     });
-    console.log(eventObjects);
+    displayMap();
     deleteMarkers();
     makeEventMarkers(eventObjects);
     setMarkers();
@@ -122,7 +122,6 @@ var GoogleMap = (function() {
   }
   EVT.on('init', init);
   EVT.on('eventResultsReturned', processEventResults);
-  EVT.on('search', displayMap);
 
   return {
     initMap: initMap
