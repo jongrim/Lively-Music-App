@@ -11,6 +11,7 @@ var GoogleMap = (function() {
 
   function processEventResults(json) {
     console.log('Maps got these results', json);
+
     let events = json._embedded.events;
     let eventObjects = events.map(event => {
       return {
@@ -98,6 +99,14 @@ var GoogleMap = (function() {
     map.fitBounds(bounds);
   }
 
+  function displayMap() {
+    if ($('#content:hidden').length === 0) {
+      return;
+    }
+    $mapContent.fadeIn();
+    initMap();
+  }
+
   function initMap() {
     // Map options - This is where the map starts
     var options = {
@@ -113,6 +122,7 @@ var GoogleMap = (function() {
   }
   EVT.on('init', init);
   EVT.on('eventResultsReturned', processEventResults);
+  EVT.on('search', displayMap);
 
   return {
     initMap: initMap

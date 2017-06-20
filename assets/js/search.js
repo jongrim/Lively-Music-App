@@ -11,9 +11,16 @@ var Search = (function() {
     $advSearchState,
     $advSearchZip,
     $advSearchStartDate,
-    $advSearchEndDate;
+    $advSearchEndDate,
+    $advForm,
+    $advFormToggleLink,
+    $introSearchBtn,
+    $introSearchField,
+    currentLocation;
 
   function init() {
+    $introSearchField = $('#introSearch');
+    $introSearchBtn = $('#introSearchBtn');
     $navbarSearchBtn = $('#navbarSearchBtn');
     $navbarSearchField = $('#navbarSearchText');
     $navbarSearchSelector = $('#navbarSearchType');
@@ -25,15 +32,33 @@ var Search = (function() {
     $advSearchZip = $('#advSearchZip');
     $advSearchStartDate = $('#advSearchStartDate');
     $advSearchEndDate = $('#advSearchEndDate');
+    $advForm = $('#advSearch');
+    $advFormToggleLink = $('#advSearchToggle');
 
+    $advFormToggleLink.on('click', toggleAdvSearchForm);
     $navbarSearchBtn.on('click', navbarSearch);
     $advSearchBtn.on('click', advSearch);
+    $introSearchBtn.on('click', introTronSearch);
+  }
+
+  function toggleAdvSearchForm() {
+    $advForm.slideToggle();
+  }
+
+  function introTronSearch(evt) {
+    evt.preventDefault();
+    if (!$introSearchField.val().trim()) {
+      resetSearchForms();
+      return;
+    }
+    let searchInput = $introSearchField.val().trim();
+    EVT.emit('search', 'event', { keyword: searchInput });
   }
 
   function navbarSearch(evt) {
     evt.preventDefault();
-
     if (!$navbarSearchField.val().trim()) {
+      resetSearchForms();
       return;
     }
     let searchInput = $navbarSearchField.val().trim();
@@ -46,6 +71,7 @@ var Search = (function() {
 
   function advSearch(evt) {
     evt.preventDefault();
+    toggleAdvSearchForm();
 
     let artist, venue, city, state, zip, location, startDate, endDate;
     artist = $advSearchArtist.val().trim();
@@ -88,6 +114,18 @@ var Search = (function() {
     EVT.emit('search', searchType, params);
   }
 
+  function resetSearchForms() {
+    $introSearchField.val('');
+    $navbarSearchField.val('');
+    $advSearchArtist.val('');
+    $advSearchVenue.val('');
+    $advSearchCity.val('');
+    $advSearchState.val('');
+    $advSearchZip.val('');
+    $advSearchStartDate.val('');
+    $advSearchEndDate.val('');
+  }
+
   function evaluateSearchType(searchParams) {
     // TODO update with city, state, and zip
     // let [artist, venue, location, startDate, endDate] = searchParams;
@@ -108,5 +146,16 @@ var Search = (function() {
     return searchType;
   }
 
+  function setCurrentLocation(geoPoint) {
+    currentLocation = geoPoint;
+    console.log('User location stored as ', geoPoint);
+  }
+
   EVT.on('init', init);
+  EVT.on('setUserLocation', setCurrentLocation);
+  EVT.on('search', resetSearchForms);
+
+  return {
+    setCurrentLocation: setCurrentLocation
+  };
 })();
