@@ -10,6 +10,7 @@ var Search = (function() {
     $advSearchCity,
     $advSearchState,
     $advSearchZip,
+    $advSearchLocationToggle,
     $advSearchStartDate,
     $advSearchEndDate,
     $advForm,
@@ -30,6 +31,7 @@ var Search = (function() {
     $advSearchCity = $('#advSearchCity');
     $advSearchState = $('#advSearchState');
     $advSearchZip = $('#advSearchZip');
+    $advSearchLocationToggle = $('#currentLocationToggle');
     $advSearchStartDate = $('#advSearchStartDate');
     $advSearchEndDate = $('#advSearchEndDate');
     $advForm = $('#advSearch');
@@ -39,6 +41,19 @@ var Search = (function() {
     $navbarSearchBtn.on('click', navbarSearch);
     $advSearchBtn.on('click', advSearch);
     $introSearchBtn.on('click', introTronSearch);
+    $advSearchLocationToggle.on('click', toggleAdvSearchLocationFields);
+  }
+
+  function toggleAdvSearchLocationFields() {
+    if ($advSearchCity.prop('disabled')) {
+      $("[rel='locationField']").each(function() {
+        $(this).prop('disabled', false);
+      });
+    } else {
+      $("[rel='locationField']").each(function() {
+        $(this).prop('disabled', true);
+      });
+    }
   }
 
   function toggleAdvSearchForm() {
