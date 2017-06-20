@@ -120,13 +120,20 @@ var Search = (function() {
       params.geoPoint = userGeohash;
     }
     if ($advSearchStartDate.val()) {
-      params.startDateTime = $advSearchStartDate.val();
+      params.startDateTime = convertTime($advSearchStartDate.val());
     }
     if ($advSearchEndDate.val()) {
-      params.endDateTime = $advSearchEndDate.val();
+      params.endDateTime = convertTime($advSearchEndDate.val());
     }
 
     EVT.emit('search', searchType, params);
+  }
+
+  function convertTime(value) {
+    // converts a string of format 'YYYY-MM-DD' to 'YYYY-MM-DDTHH:mm:ssZ'
+    let time = moment(value).toISOString();
+    time = time.slice(0, 19) + 'Z';
+    return time;
   }
 
   function resetSearchForms() {
