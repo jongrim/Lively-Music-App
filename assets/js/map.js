@@ -107,6 +107,13 @@ var GoogleMap = (function() {
     initMap();
   }
 
+  function hideMap() {
+    if ($('#content:hidden').length === 1) {
+      return;
+    }
+    $mapContent.fadeOut();
+  }
+
   function initMap() {
     // Map options - This is where the map starts
     var options = {

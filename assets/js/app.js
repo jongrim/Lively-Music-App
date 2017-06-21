@@ -1,7 +1,7 @@
 window.EVT = new EventEmitter2();
 
 var App = (function() {
-  var $introTron, $trendingTron, $trendingAttraction, trendingInterval, $noResultsModal;
+  var $introTron, $trendingTron, $trendingAttraction, trendingInterval, $noResultsModal, $loadingSpinner;
   let cycleAttractions = getNextAttraction();
 
   function init() {
@@ -9,6 +9,7 @@ var App = (function() {
     $trendingTron = $('.trendingTron');
     $trendingAttraction = $('#trendingAttraction');
     $noResultsModal = $('#noResultsModal');
+    $loadingSpinner = $('#loadingSpinner');
 
     updateTrending();
     trendingInterval = setInterval(updateTrending, 3000);
@@ -57,8 +58,10 @@ var App = (function() {
 
     // for now, everything points to an event search
     if (searchType === 'event') {
+      toggleLoadingSpinner();
       TicketMaster.eventSearch(params)
         .then(function(results) {
+          toggleLoadingSpinner();
           EVT.emit('eventResultsReturned', results);
         })
         .catch(function(err) {
@@ -89,6 +92,14 @@ var App = (function() {
       keyboard: true,
       show: true
     });
+  }
+
+  function toggleLoadingSpinner() {
+    if (!$loadingSpinner.hasClass('spinner')) {
+      $loadingSpinner.addClass('spinner');
+    } else {
+      $loadingSpinner.removeClass('spinner');
+    }
   }
 
   EVT.on('init', init);
