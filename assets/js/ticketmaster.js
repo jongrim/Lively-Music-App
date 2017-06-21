@@ -8,7 +8,7 @@ var TicketMaster = (function() {
     for (var n in params) {
       if (params.hasOwnProperty(n)) {
         if (typeof params[n] === 'string') {
-          params[n] = params[n].replace(/ /g, '+');
+          params[n] = params[n].trim().replace(/ /g, '+');
         }
         rootUrl += `&${n}=${params[n]}`;
       }
@@ -23,7 +23,6 @@ var TicketMaster = (function() {
     return new Promise((resolve, reject) => {
       let rootUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?';
       let url = buildUrl(rootUrl, params);
-      console.log(url);
       $.ajax({
         type: 'GET',
         url: url,
@@ -101,6 +100,17 @@ Example searches below. Refer to the ticketmaster docs for all of the parameter 
 //   })
 //   .catch(function(err) {
 //     console.log(err);
+//   });
+
+// event search based on location
+// TicketMaster.eventSearch({
+//   geoPoint: 'dn5bpsy5t'
+// })
+//   .then(function(json) {
+//     console.log(json);
+//   })
+//   .catch(function(error) {
+//     console.log(error);
 //   });
 
 // console.log('Searching for artist...');

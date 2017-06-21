@@ -5,3 +5,4 @@ package.json
 tests/
 tests/*
 webpack.config.js
+jsconfig.json
