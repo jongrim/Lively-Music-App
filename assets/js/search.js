@@ -77,7 +77,8 @@ var Search = (function() {
       return;
     }
     let searchInput = $navbarSearchField.val().trim();
-    let searchType = $navbarSearchSelector.val();
+    let searchType = 'event'; // hardcoding for the moment
+    // let searchType = $navbarSearchSelector.val();
 
     let params = { keyword: searchInput };
 

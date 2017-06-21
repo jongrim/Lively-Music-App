@@ -1,13 +1,14 @@
 window.EVT = new EventEmitter2();
 
 var App = (function() {
-  var $introTron, $trendingTron, $trendingAttraction, trendingInterval;
+  var $introTron, $trendingTron, $trendingAttraction, trendingInterval, $noResultsModal;
   let cycleAttractions = getNextAttraction();
 
   function init() {
     $introTron = $('.introTron');
     $trendingTron = $('.trendingTron');
     $trendingAttraction = $('#trendingAttraction');
+    $noResultsModal = $('#noResultsModal');
 
     updateTrending();
     trendingInterval = setInterval(updateTrending, 3000);
@@ -82,8 +83,17 @@ var App = (function() {
     }
   }
 
+  function displayNoResultsModal() {
+    console.log('Trying to show modal');
+    $('#noResultsModal').modal({
+      keyboard: true,
+      show: true
+    });
+  }
+
   EVT.on('init', init);
   EVT.on('search', executeSearch);
+  EVT.on('noResults', displayNoResultsModal);
 
   return {
     requestUserLocation: requestUserLocation
