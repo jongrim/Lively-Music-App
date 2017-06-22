@@ -56,7 +56,7 @@
         <span class="icon-bar"></span>
       </button>
 				<!-- Brand Image Goes Here -->
-				<p class="navbar-brand" id="brandLetter">L</p>
+				<p class="navbar-brand" id="brandLetter" role="button">L</p>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -245,12 +245,15 @@
 		<div class="row isHidden" id="overflowContent">
 			<div class="col-xs-12">
 				<table class="table table-hover" id="overflowContentTable">
-					<tr>
-						<th>Event</th>
-						<th>Venue</th>
-						<th>City</th>
-						<th>Date</th>
-					</tr>
+					<thead>
+						<tr>
+							<th>Event</th>
+							<th>Venue</th>
+							<th>City</th>
+							<th>Date</th>
+						</tr>
+					</thead>
+					<tbody id='resultsTableBody'></tbody>
 				</table>
 			</div>
 		</div>

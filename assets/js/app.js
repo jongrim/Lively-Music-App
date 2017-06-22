@@ -1,7 +1,7 @@
 window.EVT = new EventEmitter2();
 
 var App = (function() {
-  var $introTron, $trendingTron, $trendingAttraction, trendingInterval, $noResultsModal, $loadingSpinner;
+  var $introTron, $trendingTron, $trendingAttraction, trendingInterval, $noResultsModal, $loadingSpinner, $brandLetter;
   let cycleAttractions = getNextAttraction();
 
   function init() {
@@ -10,9 +10,12 @@ var App = (function() {
     $trendingAttraction = $('#trendingAttraction');
     $noResultsModal = $('#noResultsModal');
     $loadingSpinner = $('#loadingSpinner');
+    $brandLetter = $('#brandLetter');
 
     updateTrending();
     trendingInterval = setInterval(updateTrending, 3000);
+
+    $brandLetter.on('click', resetToInitialView);
   }
 
   function updateTrending() {
@@ -53,6 +56,13 @@ var App = (function() {
     $trendingTron.hide();
   }
 
+  function resetToInitialView() {
+    EVT.emit('resetToInitialView');
+    $introTron.fadeIn();
+    $trendingTron.fadeIn();
+    trendingInterval = setInterval(updateTrending, 3000);
+  }
+
   function executeSearch(searchType, params) {
     hideTrons();
 
@@ -87,7 +97,6 @@ var App = (function() {
   }
 
   function displayNoResultsModal() {
-    console.log('Trying to show modal');
     $('#noResultsModal').modal({
       keyboard: true,
       show: true
