@@ -59,7 +59,6 @@
 				<p class="navbar-brand" id="brandLetter">L</p>
 			</div>
 
-
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<form class="navbar-form navbar-right">
 					<div class="form-group">
@@ -83,30 +82,7 @@
 		<!-- /.container-fluid -->
 	</nav>
 
-	<div class="jumbotron introTron">
-		<h1><span class="brandFont brandOrange">Lively</span> events</h1>
-		<p>Live more musically</p>
-		<p>Start now</p>
-		<label for="introSearch">Search Events</label>
-		<form action="#" class="form-inline">
-			<div class="form-group">
-				<input type="text" class="form-control" id="introSearch" placeholder="Search events">
-			</div>
-			<button type="submit" class="btn btn-primary searchBtn" id="introSearchBtn">Search</button>
-		</form>
-	</div>
-
-	<div class="jumbotron trendingTron">
-		<h3 class="text-right">What Users Are Searching For</h3>
-		<h1 class="text-right brandFont"><span class="brandOrange" id="trendingAttraction"></span></h1>
-	</div>
-
-
-	<!-- container fluid-->
-	<!-- each row is given an ID; can add more IDs and classes as needed -->
-
-	<div class="container-fluid">
-
+	<div class="container">
 		<!-- advanced search -->
 		<div class="row isHidden" id="advSearch">
 			<div class="col-xs-12">
@@ -217,6 +193,31 @@
 			</div>
 		</div>
 		<!-- End of advanced search row -->
+	</div>
+
+	<div class="jumbotron introTron">
+		<h1><span class="brandFont brandOrange">Lively</span> events</h1>
+		<p>Live more musically</p>
+		<p>Start now</p>
+		<label for="introSearch">Search Events</label>
+		<form action="#" class="form-inline">
+			<div class="form-group">
+				<input type="text" class="form-control" id="introSearch" placeholder="Search events">
+			</div>
+			<button type="submit" class="btn btn-primary searchBtn" id="introSearchBtn">Search</button>
+		</form>
+	</div>
+
+	<div class="jumbotron trendingTron">
+		<h3 class="text-right">What Users Are Searching For</h3>
+		<h1 class="text-right brandFont"><span class="brandOrange" id="trendingAttraction"></span></h1>
+	</div>
+
+
+	<!-- container fluid-->
+	<!-- each row is given an ID; can add more IDs and classes as needed -->
+
+	<div class="container-fluid">
 
 		<!-- content (map or carousel) -->
 		<div class="row isHidden" id="content">
@@ -250,7 +251,7 @@
 						<th class="text-center">Date</th>
 						<th class="text-center">Venue</th>
 					</tr>
-        </table>
+				</table>
 			</div>
 		</div>
 
