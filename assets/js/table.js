@@ -1,10 +1,11 @@
 'use strict';
 
 var Table = (function() {
-  var eventObjects, $tableDiv;
+  var eventObjects, $tableDiv, $tableBody;
 
   function init() {
     $tableDiv = $('#overflowContent');
+    $tableBody = $('#resultsTableBody');
   }
 
   function showTable() {
@@ -12,7 +13,11 @@ var Table = (function() {
   }
 
   function hideTable() {
-    $tableDiv.fadeOut();
+    $tableDiv.hide();
+  }
+
+  function clearTableBody() {
+    $tableBody.empty();
   }
 
   function createHTMLTable() {
@@ -22,7 +27,7 @@ var Table = (function() {
       var eVenue = eventObjects[i].venue.name;
       var eDate = moment(eventObjects[i].startDate).format('dddd, MMM Do YYYY');
 
-      $('#overflowContentTable').append(
+      $tableBody.append(
         '<tr><td>' + eName + '</td><td>' + eVenue + '</td><td>' + eCity + '</td><td>' + eDate + '</td></tr>'
       );
     }
@@ -42,10 +47,12 @@ var Table = (function() {
         }
       };
     });
+    clearTableBody();
     createHTMLTable();
   }
 
-  EVT.on('eventResultsReturned', processEventResults);
-  EVT.on('eventResultsReturned', showTable);
+  EVT.on('resultsValid', processEventResults);
+  EVT.on('resultsValid', showTable);
+  EVT.on('resetToInitialView', hideTable);
   EVT.on('init', init);
 })();

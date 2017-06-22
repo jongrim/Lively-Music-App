@@ -111,7 +111,7 @@ var GoogleMap = (function() {
     if ($('#content:hidden').length === 1) {
       return;
     }
-    $mapContent.fadeOut();
+    $mapContent.hide();
   }
 
   function initMap() {
@@ -129,6 +129,7 @@ var GoogleMap = (function() {
   }
   EVT.on('init', init);
   EVT.on('resultsValid', processEventResults);
+  EVT.on('resetToInitialView', hideMap);
 
   return {
     initMap: initMap
