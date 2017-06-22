@@ -1,12 +1,21 @@
 'use strict';
 
 var GoogleMap = (function() {
-  var $mapContent, mapMarkers, map, bounds, infoWindow;
+  var $mapContent, $mapContainer, mapMarkers, map, bounds, infoWindow;
 
   function init() {
-    $mapContent = $('#content');
-    $mapContent.height(window.innerHeight / 2);
+    $mapContent = $('#map');
+    $mapContainer = $('#content');
     mapMarkers = [];
+    $(function() {
+      $('#content').resizable({
+        maxHeight: 500,
+        minHeight: 150,
+        minWidth: window.innerWidth,
+        maxWidth: window.innerWidth,
+        ghost: true
+      });
+    });
   }
 
   function processEventResults(json) {
@@ -103,7 +112,7 @@ var GoogleMap = (function() {
     if ($('#content:hidden').length === 0) {
       return;
     }
-    $mapContent.fadeIn();
+    $mapContainer.fadeIn();
     initMap();
   }
 
@@ -111,7 +120,7 @@ var GoogleMap = (function() {
     if ($('#content:hidden').length === 1) {
       return;
     }
-    $mapContent.hide();
+    $mapContainer.hide();
   }
 
   function initMap() {
@@ -124,7 +133,7 @@ var GoogleMap = (function() {
     };
 
     // New map
-    map = new google.maps.Map(document.getElementById('content'), options);
+    map = new google.maps.Map(document.getElementById('map'), options);
     infoWindow = new google.maps.InfoWindow({});
   }
   EVT.on('init', init);
