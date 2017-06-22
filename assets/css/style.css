@@ -10,6 +10,19 @@ body {
   font-family: 'Raleway', 'Segoe UI', sans-serif;
 }
 
+/*************************
+Adv Search
+**************************/
+#advSearch {
+  position: fixed;
+  left: 15px;
+  right: 15px;
+  background-color: white;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #dbdbdb;
+  z-index: 2;
+}
+
 /****
 Forms
 ****/
@@ -24,8 +37,14 @@ Forms
   border-color: #082E67;
 }
 
-#advSearch {
-  margin-bottom: 15px;
+#closeSearch {
+  background-color: #f86d13;
+  border-color: #f86d13;
+}
+
+#closeSearch:hover, #closeSearch:focus {
+  background-color: #C64F02;
+  border-color: #C64F02;
 }
 
 @media (max-width: 768px) {
@@ -273,15 +292,23 @@ Google maps styling
 }
 
 #content {
-  height: 40vh;
-}
-
-#sgrip {
-  width: 100%;
-  height: 4px;
-  background-color: #F86D13;
+  height: 35vh;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  z-index: 1;
 }
 
 .ui-widget-content {
   border: none;
+}
+
+/********************************
+Table display area
+********************************/
+#overflowContent {
+  position: relative;
+  top: 350px;
 }
