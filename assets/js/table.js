@@ -10,8 +10,8 @@ var Table = (function() {
     resultsVisilbe = false;
 
     window.addEventListener('resize', setTablePosition);
-    $().on('resize', function() {
-      console.log('map resized!');
+    $('#content').on('resizestop', function() {
+      setTablePosition();
     });
   }
 
