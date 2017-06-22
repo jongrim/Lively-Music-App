@@ -31,7 +31,7 @@ var Table = (function() {
   }
 
   function setFooterPosition(mapHeight = 0, tableHeight = 0) {
-    let minTop = Math.max(window.innerHeight - 175, 667);
+    let minTop = Math.max(window.innerHeight - 175, 628);
     let footerTop = Math.max(minTop, mapHeight + tableHeight);
     $footer.css('top', footerTop + 'px');
   }
