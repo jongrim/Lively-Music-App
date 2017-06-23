@@ -9,6 +9,7 @@
 	<title>Lively Music App</title>
 
 	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="./assets/css/cosmo.css">
 	<link rel="stylesheet" href="./assets/css/style.css">
 
@@ -17,7 +18,10 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
+
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	 crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
 	 crossorigin="anonymous"></script>
 
 	<!-- Latest compiled and minified JavaScript -->
@@ -220,8 +224,8 @@
 	<div class="container-fluid">
 
 		<!-- content (map or carousel) -->
-		<div class="row isHidden" id="content">
-			<div class="col-xs-12">
+		<div class="row isHidden ui-widget-content" id="content">
+			<div id="map">
 			</div>
 		</div>
 
