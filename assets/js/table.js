@@ -1,19 +1,44 @@
 'use strict';
 
 var Table = (function() {
-  var eventObjects, $tableDiv, $tableBody;
+  var eventObjects, $tableDiv, $tableBody, $footer, resultsVisilbe;
 
   function init() {
     $tableDiv = $('#overflowContent');
     $tableBody = $('#resultsTableBody');
+    $footer = $('footer');
+    resultsVisilbe = false;
+
+    window.addEventListener('resize', setTablePosition);
+    $('#content').on('resizestop', function() {
+      setTablePosition();
+    });
   }
 
-  function showTable() {
-    $tableDiv.fadeIn();
+  function setTablePosition() {
+    let mapRect = document.getElementById('map').getBoundingClientRect();
+    let mapHeight = mapRect.bottom - mapRect.top;
+    let tableHeight = 0;
+    if (resultsVisilbe) {
+      $tableDiv.css('top', mapRect.bottom - mapRect.top + 'px');
+      $tableDiv.css('visibility', 'hidden');
+      $tableDiv.removeClass('isHidden');
+      let tableRect = document.getElementById('overflowContent').getBoundingClientRect();
+      tableHeight = tableRect.bottom - tableRect.top;
+      $tableDiv.css('visibility', 'visible');
+    }
+    setFooterPosition(mapHeight, tableHeight);
+  }
+
+  function setFooterPosition(mapHeight = 0, tableHeight = 0) {
+    let minTop = Math.max(window.innerHeight - 175, 628);
+    let footerTop = Math.max(minTop, mapHeight + tableHeight);
+    $footer.css('top', footerTop + 'px');
   }
 
   function hideTable() {
-    $tableDiv.hide();
+    $tableDiv.addClass('isHidden');
+    resultsVisilbe = false;
   }
 
   function clearTableBody() {
@@ -31,6 +56,8 @@ var Table = (function() {
         '<tr><td>' + eName + '</td><td>' + eVenue + '</td><td>' + eCity + '</td><td>' + eDate + '</td></tr>'
       );
     }
+    resultsVisilbe = true;
+    setTablePosition();
   }
 
   function processEventResults(json) {
@@ -52,7 +79,7 @@ var Table = (function() {
   }
 
   EVT.on('resultsValid', processEventResults);
-  EVT.on('resultsValid', showTable);
   EVT.on('resetToInitialView', hideTable);
+  EVT.on('resetToInitialView', setFooterPosition);
   EVT.on('init', init);
 })();
