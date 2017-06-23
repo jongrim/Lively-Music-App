@@ -5,6 +5,7 @@ var Search = (function() {
     $navbarSearchSelector,
     $navbarSearchField,
     $advSearchBtn,
+    $closeSearchBtn,
     $advSearchArtist,
     $advSearchVenue,
     $advSearchCity,
@@ -36,7 +37,9 @@ var Search = (function() {
     $advSearchEndDate = $('#advSearchEndDate');
     $advForm = $('#advSearch');
     $advFormToggleLink = $('#advSearchToggle');
+    $closeSearchBtn = $('#closeSearch');
 
+    $closeSearchBtn.on('click', toggleAdvSearchForm);
     $advFormToggleLink.on('click', toggleAdvSearchForm);
     $navbarSearchBtn.on('click', navbarSearch);
     $advSearchBtn.on('click', advSearch);
