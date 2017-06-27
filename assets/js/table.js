@@ -50,11 +50,9 @@ var Table = (function() {
 
   function setPaginatorPosition() {
     $paginator.css('top', $tableDiv.position().top + $tableDiv.height() + 'px');
-    $paginator.css('visibility', 'hidden');
-    showPagination();
     let leftBorder = window.innerWidth / 2 - $paginator.width() / 2;
     $paginator.css('left', leftBorder);
-    $paginator.css('visibility', 'visible');
+    showPagination();
   }
 
   function setFooterPosition(mapHeight = 0, tableHeight = 0) {
@@ -63,7 +61,6 @@ var Table = (function() {
     $footer.css('top', footerTop + 'px');
     if ($paginator.position().top > $footer.position().top) {
       footerTop = $paginator.position().top + 91; // to account for pagination element height
-      // console.log($paginator.position().top, footerTop);
     }
     $footer.css('top', footerTop + 'px');
   }
