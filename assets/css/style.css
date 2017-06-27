@@ -313,3 +313,10 @@ Table display area
   position: relative;
   top: 350px;
 }
+
+/*******************************
+Pagination
+*******************************/
+#paginator {
+  position: absolute;
+}
