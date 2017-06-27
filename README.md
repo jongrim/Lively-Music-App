@@ -21,4 +21,4 @@ This software was designed and developed by the following team of students at th
 |Hajar Zemzem|Core developer, Firebase|[Hajar's GitHub](https://github.com/hzemzem)|[Hajar's LinkedIn](https://www.linkedin.com/in/hajarzemzem/)
 |Mike Hashimoto|Core developer|[Mike's GitHub](https://github.com/mikehashi)|[Mike's LinkedIn](https://www.linkedin.com/in/michael-hashimoto-a644224a/)
 |Jack Bashirian|Core developer, Google Maps API|[Jack's GitHub](https://github.com//jack2017coding)|[Jack's LinkedIn](https://www.linkedin.com/in/jack-bashirian-p-e-20309b38/)
-|Jonathan Grim|Core developer, Documentation, Ticketmaster API|[Jon's GitHub](https://github.com/jongrim)|[Jon's LinkedIn](https://www.linkedin.com/in/jonathangrim/)|[Jon's Portfolio](https://jongrim.github.io/)
+|Jonathan Grim|Core developer, Documentation, Ticketmaster API|[Jon's GitHub](https://github.com/jongrim)|[Jon's LinkedIn](https://www.linkedin.com/in/jonathangrim/)|[Jon's Portfolio](https://jongrim.github.io/portfolio)
