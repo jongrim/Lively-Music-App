@@ -1,7 +1,7 @@
 'use strict';
 
 var Table = (function() {
-  var eventObjects, $tableDiv, $tableBody, $footer, $paginator, $paginatorList, resultsVisilbe;
+  var eventObjects, $tableDiv, $tableBody, $footer, $paginator, $paginatorList, resultsVisilbe, currentPage, totalPages;
 
   function init() {
     $tableDiv = $('#overflowContent');
@@ -114,9 +114,10 @@ var Table = (function() {
   }
 
   function processEventResults(json) {
-    console.log('tables got these results', json);
-    let pages = json.page.totalPages;
-    createPages(pages);
+    // console.log('tables got these results', json);
+    currentPage = json.page.number;
+    totalPages = json.page.totalPages;
+    createPages(totalPages);
     var events = json._embedded.events;
     eventObjects = events.map(event => {
       return {
@@ -134,18 +135,22 @@ var Table = (function() {
 
   function previousPage(evt) {
     evt.preventDefault();
-    console.log('Loading previous page');
-    // Search.repeatSearchWithPage
+    if (currentPage > 0) {
+      let page = String(currentPage - 1);
+      Search.repeatSearchWithPage(page);
+    }
   }
 
   function nextPage(evt) {
     evt.preventDefault();
-    console.log('Loading next');
+    if (currentPage < totalPages - 1) {
+      let page = String(currentPage + 1);
+      Search.repeatSearchWithPage(page);
+    }
   }
 
   function loadPage(evt) {
     evt.preventDefault();
-    console.log($(this).attr('data-page'));
     Search.repeatSearchWithPage($(this).attr('data-page'));
   }
 
