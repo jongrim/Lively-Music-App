@@ -66,12 +66,19 @@ var Table = (function() {
   }
 
   function createPages(pageCount) {
-    let pageList = `<li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>`;
+    let pageArray = [];
+    let $pagePrev = $(`<li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>`);
+    $pagePrev.on('click', previousPage);
+    pageArray.push($pagePrev);
     for (var i = 0; i < pageCount; i++) {
-      pageList += `<li><a href="#">${i + 1}</a></li>`;
+      let $page = $(`<li data-page=${i}><a href="#">${i + 1}</a></li>`);
+      $page.on('click', loadPage);
+      pageArray.push($page);
     }
-    pageList += `<li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>`;
-    $paginatorList.html(pageList);
+    let $pageNext = $(`<li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>`);
+    $pageNext.on('click', nextPage);
+    pageArray.push($pageNext);
+    $paginatorList.html(pageArray);
   }
 
   function showPagination() {
@@ -123,6 +130,23 @@ var Table = (function() {
     });
     clearTableBody();
     createHTMLTable();
+  }
+
+  function previousPage(evt) {
+    evt.preventDefault();
+    console.log('Loading previous page');
+    // Search.repeatSearchWithPage
+  }
+
+  function nextPage(evt) {
+    evt.preventDefault();
+    console.log('Loading next');
+  }
+
+  function loadPage(evt) {
+    evt.preventDefault();
+    console.log($(this).attr('data-page'));
+    Search.repeatSearchWithPage($(this).attr('data-page'));
   }
 
   EVT.on('resultsValid', processEventResults);

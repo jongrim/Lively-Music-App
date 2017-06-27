@@ -18,7 +18,8 @@ var Search = (function() {
     $advFormToggleLink,
     $introSearchBtn,
     $introSearchField,
-    userGeohash;
+    userGeohash,
+    lastSearch;
 
   function init() {
     $introSearchField = $('#introSearch');
@@ -47,6 +48,10 @@ var Search = (function() {
     $advSearchLocationToggle.on('click', toggleAdvSearchLocationFields);
   }
 
+  function setLastSearch(params) {
+    lastSearch = params;
+  }
+
   function toggleAdvSearchLocationFields() {
     if ($advSearchCity.prop('disabled')) {
       $("[rel='locationField']").each(function() {
@@ -71,6 +76,7 @@ var Search = (function() {
     }
     let searchInput = $introSearchField.val().trim();
     EVT.emit('search', 'event', { keyword: searchInput });
+    setLastSearch({ keyword: searchInput });
   }
 
   function navbarSearch(evt) {
@@ -86,6 +92,7 @@ var Search = (function() {
     let params = { keyword: searchInput };
 
     EVT.emit('search', searchType, params);
+    setLastSearch(params);
   }
 
   function advSearch(evt) {
@@ -131,6 +138,7 @@ var Search = (function() {
     }
 
     EVT.emit('search', searchType, params);
+    setLastSearch(params);
   }
 
   function convertTime(value) {
@@ -178,11 +186,19 @@ var Search = (function() {
     console.log('User location stored as', geoPoint);
   }
 
+  function repeatSearchWithPage(page) {
+    if (typeof page === 'string') {
+      lastSearch.page = page;
+      EVT.emit('search', 'event', lastSearch);
+    }
+  }
+
   EVT.on('init', init);
   EVT.on('setUserLocation', setCurrentLocation);
   EVT.on('search', resetSearchForms);
 
   return {
-    setCurrentLocation: setCurrentLocation
+    setCurrentLocation: setCurrentLocation,
+    repeatSearchWithPage: repeatSearchWithPage
   };
 })();
