@@ -28,13 +28,14 @@ Forms
 ****/
 
 .searchBtn {
-  background-color: #1A51A3;
-  border-color: #1A51A3;
+  background-color: #1a51a3;
+  border-color: #1a51a3;
 }
 
-.searchBtn:hover, .searchBtn:focus {
-  background-color: #082E67;
-  border-color: #082E67;
+.searchBtn:hover,
+.searchBtn:focus {
+  background-color: #082e67;
+  border-color: #082e67;
 }
 
 #closeSearch {
@@ -42,9 +43,10 @@ Forms
   border-color: #f86d13;
 }
 
-#closeSearch:hover, #closeSearch:focus {
-  background-color: #C64F02;
-  border-color: #C64F02;
+#closeSearch:hover,
+#closeSearch:focus {
+  background-color: #c64f02;
+  border-color: #c64f02;
 }
 
 @media (max-width: 768px) {
@@ -89,7 +91,8 @@ input.toggle-input + label {
   -o-transition: background 0.4s;
   transition: background 0.4s;
 }
-input.toggle-input + label:before, input.toggle-input + label:after {
+input.toggle-input + label:before,
+input.toggle-input + label:after {
   display: block;
   position: absolute;
   content: "";
@@ -191,8 +194,8 @@ Spinner
   margin-left: -10px;
   border-radius: 50%;
   border: 5px solid transparent;
-  border-top-color: #F86D13;
-  border-bottom-color: #F86D13;
+  border-top-color: #f86d13;
+  border-bottom-color: #f86d13;
   animation: spinner .8s ease infinite;
 }
 
@@ -201,7 +204,6 @@ Footer
 *****/
 
 footer {
-  margin-top: 55px;
   padding-bottom: 15px;
   border-top: 1px solid #dbdbdb;
   position: absolute;
@@ -215,16 +217,17 @@ Branding classes
 ***************/
 
 .brandOrange {
-  color: #F86D13;
+  color: #f86d13;
 }
 
 .brandFont {
   font-family: 'Lobster', cursive;
 }
 
-.navbar-brand, #brandLetter {
+.navbar-brand,
+#brandLetter {
   font-family: 'Lobster', cursive;
-  color: #F86D13;
+  color: #f86d13;
   font-size: 32px;
   margin-bottom: 0;
   padding-top: 12px;
@@ -238,7 +241,7 @@ Jumbotron styling for initial page load
 }
 
 .introTron {
-  background-color: #FFC96D;
+  background-color: #ffc96d;
   padding-left: 4em;
 }
 
@@ -282,7 +285,8 @@ Google maps styling
   max-width: 250px;
 }
 
-.infoWindow ul, ol {
+.infoWindow ul,
+ol {
   list-style: none;
 }
 
