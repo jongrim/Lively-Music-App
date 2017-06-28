@@ -56,13 +56,16 @@ var Table = (function() {
   }
 
   function setFooterPosition(mapHeight = 0, tableHeight = 0) {
-    let minTop = Math.max(window.innerHeight - 175, 628);
-    let footerTop = Math.max(minTop, mapHeight + tableHeight);
-    $footer.css('top', footerTop + 'px');
-    if ($paginator.position().top > $footer.position().top) {
-      footerTop = $paginator.position().top + 91; // to account for pagination element height
+    let minTop = Math.max(window.innerHeight - 175, 683); //bad imperative programmming :(
+    $footer.css('top', minTop + 'px');
+
+    if (resultsVisilbe) {
+      let footerTop = Math.max(minTop, mapHeight + tableHeight);
+      $footer.css('top', footerTop + 'px');
+      let pBottom = $paginator.position().top + $paginator.height();
+      footerTop = Math.max(footerTop, pBottom);
+      $footer.css('top', footerTop + 'px');
     }
-    $footer.css('top', footerTop + 'px');
   }
 
   function createPages(pageCount) {
