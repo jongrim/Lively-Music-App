@@ -320,3 +320,8 @@ Pagination
 #paginator {
   position: absolute;
 }
+
+#currentPageLink {
+  background: #e6e6e6;
+  cursor: default;
+}
