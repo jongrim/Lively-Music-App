@@ -9,7 +9,7 @@ var GoogleMap = (function() {
     mapMarkers = [];
     $(function() {
       $('#content').resizable({
-        maxHeight: window.innerHeight / 10 * 3.5,
+        maxHeight: window.innerHeight / 10 * 5,
         minHeight: 150,
         minWidth: window.innerWidth,
         maxWidth: window.innerWidth,
