@@ -76,15 +76,17 @@ var Table = (function() {
       pageArray.push($pagePrev);
     }
 
-    for (var i = 0; i < pageCount; i++) {
-      let $page = $(`<li data-page=${i}><a href="#">${i + 1}</a></li>`);
-      if (i === currentPage) {
-        $page.children('a').attr('id', 'currentPageLink');
-        $page.on('click', evt => evt.preventDefault());
-      } else {
-        $page.on('click', loadPage);
+    for (var i = currentPage - 2; i < currentPage + 3; i++) {
+      if (i >= 0 && i < totalPages) {
+        let $page = $(`<li data-page=${i}><a href="#">${i + 1}</a></li>`);
+        if (i === currentPage) {
+          $page.children('a').attr('id', 'currentPageLink');
+          $page.on('click', evt => evt.preventDefault());
+        } else {
+          $page.on('click', loadPage);
+        }
+        pageArray.push($page);
       }
-      pageArray.push($page);
     }
 
     if (currentPage !== totalPages - 1) {
