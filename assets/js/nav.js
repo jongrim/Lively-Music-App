@@ -12,7 +12,11 @@ var Nav = (function() {
   }
 
   function handleSearch() {
-    $('#navbar-collapse:visible').length === 1 && toggleCollapse();
+    if (window.innerWidth < 768) {
+      if ($('#navbar-collapse:visible').length === 1) {
+        toggleCollapse();
+      }
+    }
   }
 
   EVT.on('init', init);
