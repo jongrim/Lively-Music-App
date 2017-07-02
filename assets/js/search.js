@@ -2,7 +2,6 @@
 
 var Search = (function() {
   var $navbarSearchBtn,
-    $navbarSearchSelector,
     $navbarSearchField,
     $advSearchBtn,
     $closeSearchBtn,
@@ -26,7 +25,6 @@ var Search = (function() {
     $introSearchBtn = $('#introSearchBtn');
     $navbarSearchBtn = $('#navbarSearchBtn');
     $navbarSearchField = $('#navbarSearchText');
-    $navbarSearchSelector = $('#navbarSearchType');
     $advSearchBtn = $('#advSearchBtn');
     $advSearchArtist = $('#advSearchArtist');
     $advSearchVenue = $('#advSearchVenue');
@@ -86,8 +84,7 @@ var Search = (function() {
       return;
     }
     let searchInput = $navbarSearchField.val().trim();
-    let searchType = 'event'; // hardcoding for the moment
-    // let searchType = $navbarSearchSelector.val();
+    let searchType = 'event';
 
     let params = { keyword: searchInput };
 
