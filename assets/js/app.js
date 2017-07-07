@@ -76,6 +76,7 @@ var App = (function() {
         })
         .catch(function(err) {
           console.error(err);
+          resetToInitialView();
         });
     } else if (searchType === 'artist') {
       TicketMaster.eventSearch(params)
