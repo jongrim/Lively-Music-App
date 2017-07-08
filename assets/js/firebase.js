@@ -16,6 +16,7 @@ var Firebase = (function() {
 
     searchArr = [];
 
+    // Load database values on init event - listener detaches after
     database
       .ref()
       .once(
@@ -32,7 +33,7 @@ var Firebase = (function() {
           console.error('DB error: ', error);
         }
       )
-      .then(() => EVT.emit('databaseReady'));
+      .then(() => EVT.emit('databaseReady')); // called after database values have been processed - alert that database is ready
   }
   // --------------------------------------------------
 
@@ -41,13 +42,18 @@ var Firebase = (function() {
   }
 
   // --------------------------------------------------
-
   function newSearch(event, params) {
-    searchInput = params.keyword.replace(/\+/, ' ');
-
+    // params are received from 'search' event - params may be artist or venue
+    // store the search term temporarily until search term is validated
+    searchInput = params.keyword.replace(/\+/, ' '); // remove any + that was used for URL
     jsUcfirst(searchInput);
-    searchArr.push(searchInput);
+  }
 
+  function storeSearch() {
+    // search term had valid results, so store in memory and DB
+    searchArr.push(searchInput); // add search term to in memory array
+
+    // add search term to database for data persistence
     database.ref().push({
       searchInput: searchInput
     });
@@ -55,26 +61,27 @@ var Firebase = (function() {
 
   // --------------------------------------------------
 
-
   function getNextAttraction() {
     var i = -1;
-    return nextAttraction;
+    return nextAttraction; // return a function reference
     function nextAttraction() {
       if (i === searchArr.length - 1) {
+        // i is at end of array, so reset to beginning
         i = 0;
       } else {
+        // i is not at end, so incrememnt
         i++;
       }
-      return searchArr[i].replace(/\+/, ' ');
+      return searchArr[i].replace(/\+/, ' '); // make sure string doesn't have a + in it
     }
   }
 
-  EVT.on('init', init);
-  EVT.on('search', newSearch);
+  EVT.on('init', init); // listen for init event
+  EVT.on('search', newSearch); // listen for search event
+  EVT.on('resultsValid', storeSearch); // listen for a valid search event
 
   // public API
   return {
     getNextAttraction: getNextAttraction
   };
-  
 })();
