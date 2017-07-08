@@ -2,7 +2,7 @@ window.EVT = new EventEmitter2();
 
 var App = (function() {
   var $introTron, $trendingTron, $trendingAttraction, trendingInterval, $noResultsModal, $loadingSpinner, $brandLetter;
-  let cycleAttractions = getNextAttraction();
+  var cycleAttractions;
 
   function init() {
     $introTron = $('.introTron');
@@ -12,10 +12,14 @@ var App = (function() {
     $loadingSpinner = $('#loadingSpinner');
     $brandLetter = $('#brandLetter');
 
-    updateTrending();
-    trendingInterval = setInterval(updateTrending, 3000);
+    cycleAttractions = Firebase.getNextAttraction();
 
     $brandLetter.on('click', resetToInitialView);
+  }
+
+  function setTrending() {
+    updateTrending();
+    trendingInterval = setInterval(updateTrending, 3000);
   }
 
   function updateTrending() {
@@ -23,20 +27,6 @@ var App = (function() {
       $trendingAttraction.text(cycleAttractions());
       $trendingAttraction.fadeIn();
     });
-  }
-
-  function getNextAttraction() {
-    var i = -1;
-    let trendingAttractions = ['Beyonce', 'Kings of Leon', 'Muse', 'The Killers'];
-    function nextAttraction() {
-      if (i === trendingAttractions.length - 1) {
-        i = 0;
-      } else {
-        i++;
-      }
-      return trendingAttractions[i];
-    }
-    return nextAttraction;
   }
 
   function requestUserLocation() {
@@ -114,6 +104,7 @@ var App = (function() {
   EVT.on('init', init);
   EVT.on('search', executeSearch);
   EVT.on('noResults', displayNoResultsModal);
+  EVT.on('databaseReady', setTrending);
 
   return {
     requestUserLocation: requestUserLocation
