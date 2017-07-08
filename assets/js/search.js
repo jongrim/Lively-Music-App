@@ -2,7 +2,6 @@
 
 var Search = (function() {
   var $navbarSearchBtn,
-    $navbarSearchSelector,
     $navbarSearchField,
     $advSearchBtn,
     $closeSearchBtn,
@@ -26,7 +25,6 @@ var Search = (function() {
     $introSearchBtn = $('#introSearchBtn');
     $navbarSearchBtn = $('#navbarSearchBtn');
     $navbarSearchField = $('#navbarSearchText');
-    $navbarSearchSelector = $('#navbarSearchType');
     $advSearchBtn = $('#advSearchBtn');
     $advSearchArtist = $('#advSearchArtist');
     $advSearchVenue = $('#advSearchVenue');
@@ -34,8 +32,11 @@ var Search = (function() {
     $advSearchState = $('#advSearchState');
     $advSearchZip = $('#advSearchZip');
     $advSearchLocationToggle = $('#currentLocationToggle');
+
     $advSearchStartDate = $('#advSearchStartDate');
+    $advSearchStartDate.attr('min', moment().format('YYYY-MM-DD'));
     $advSearchEndDate = $('#advSearchEndDate');
+
     $advForm = $('#advSearch');
     $advFormToggleLink = $('#advSearchToggle');
     $closeSearchBtn = $('#closeSearch');
@@ -86,8 +87,7 @@ var Search = (function() {
       return;
     }
     let searchInput = $navbarSearchField.val().trim();
-    let searchType = 'event'; // hardcoding for the moment
-    // let searchType = $navbarSearchSelector.val();
+    let searchType = 'event';
 
     let params = { keyword: searchInput };
 
@@ -106,8 +106,8 @@ var Search = (function() {
     state = $advSearchState.val();
     zip = $advSearchZip.val().trim();
     location = $('#currentLocationToggle').prop('checked');
-    startDate = $advSearchStartDate.val();
-    endDate = $advSearchEndDate.val();
+    startDate = $advSearchStartDate.val().trim();
+    endDate = $advSearchEndDate.val().trim();
     let searchType = evaluateSearchType([artist, venue, city, state, zip, startDate, endDate]);
     let params = { keyword: '' };
 
@@ -130,11 +130,11 @@ var Search = (function() {
     if (location) {
       params.geoPoint = userGeohash;
     }
-    if ($advSearchStartDate.val()) {
-      params.startDateTime = convertTime($advSearchStartDate.val());
+    if (isValidDate(startDate)) {
+      params.startDateTime = convertTime(startDate);
     }
-    if ($advSearchEndDate.val()) {
-      params.endDateTime = convertTime($advSearchEndDate.val());
+    if (isValidDate(endDate)) {
+      params.endDateTime = convertTime(endDate);
     }
 
     EVT.emit('search', searchType, params);
@@ -146,6 +146,11 @@ var Search = (function() {
     let time = moment(value).toISOString();
     time = time.slice(0, 19) + 'Z';
     return time;
+  }
+
+  function isValidDate(dateString) {
+    var regEx = /^\d{4}-\d{2}-\d{2}$/;
+    return dateString.match(regEx) != null;
   }
 
   function resetSearchForms() {
