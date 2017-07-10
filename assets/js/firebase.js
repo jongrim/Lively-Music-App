@@ -1,15 +1,15 @@
-var Firebase = (function() {
+var Firebase = (function () {
   var database, searchInput, searchArr;
 
   function init() {
     // Initialize Firebase
     var config = {
-      apiKey: 'AIzaSyDRp6dE1LX_Fa9jdjfPMwxy9e2rhN0T0IA',
-      authDomain: 'lively-music-app.firebaseapp.com',
-      databaseURL: 'https://lively-music-app.firebaseio.com',
-      projectId: 'lively-music-app',
-      storageBucket: '',
-      messagingSenderId: '524607575754'
+      apiKey: "AIzaSyBPjrttggZXgEaqFeb2Q7P6pTctxGyxlkQ",
+      authDomain: "lively-3be7f.firebaseapp.com",
+      databaseURL: "https://lively-3be7f.firebaseio.com",
+      projectId: "lively-3be7f",
+      storageBucket: "lively-3be7f.appspot.com",
+      messagingSenderId: "752484036952"
     };
     firebase.initializeApp(config);
     database = firebase.database();
@@ -19,18 +19,18 @@ var Firebase = (function() {
     database
       .ref()
       .once(
-        'value',
-        function(snap, y) {
-          let obj = snap.val();
-          for (var i in obj) {
-            if (obj[i].searchInput != null) {
-              searchArr.push(obj[i].searchInput);
-            }
+      'value',
+      function (snap, y) {
+        let obj = snap.val();
+        for (var i in obj) {
+          if (obj[i].searchInput != null) {
+            searchArr.push(obj[i].searchInput);
           }
-        },
-        function(error) {
-          console.error('DB error: ', error);
         }
+      },
+      function (error) {
+        console.error('DB error: ', error);
+      }
       )
       .then(() => EVT.emit('databaseReady'));
   }
@@ -76,5 +76,5 @@ var Firebase = (function() {
   return {
     getNextAttraction: getNextAttraction
   };
-  
+
 })();
