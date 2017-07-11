@@ -35,22 +35,18 @@ var Firebase = (function() {
       )
       .then(() => EVT.emit('databaseReady')); // called after database values have been processed - alert that database is ready
   }
-  // --------------------------------------------------
 
-  function jsUcfirst(string) {
-    searchInput = string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
-  // --------------------------------------------------
   function newSearch(event, params) {
     // params are received from 'search' event - params may be artist or venue
     // store the search term temporarily until search term is validated
     searchInput = params.keyword.replace(/\+/, ' '); // remove any + that was used for URL
-    jsUcfirst(searchInput);
   }
 
   function storeSearch() {
     // search term had valid results, so store in memory and DB
+    if (searchArr.indexOf(searchInput) >= 0) {
+      return;
+    }
     searchArr.push(searchInput); // add search term to in memory array
 
     // add search term to database for data persistence
@@ -58,8 +54,6 @@ var Firebase = (function() {
       searchInput: searchInput
     });
   }
-
-  // --------------------------------------------------
 
   function getNextAttraction() {
     var i = -1;
