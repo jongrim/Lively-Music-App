@@ -39,7 +39,7 @@ var Firebase = (function() {
   function newSearch(event, params) {
     // params are received from 'search' event - params may be artist or venue
     // store the search term temporarily until search term is validated
-    searchInput = params.keyword.replace(/\+/, ' '); // remove any + that was used for URL
+    searchInput = params.keyword.replace(/\+/g, ' '); // remove any + that was used for URL
   }
 
   function storeSearch() {
@@ -66,7 +66,7 @@ var Firebase = (function() {
         // i is not at end, so incrememnt
         i++;
       }
-      return searchArr[i].replace(/\+/, ' '); // make sure string doesn't have a + in it
+      return searchArr[i].replace(/\+/g, ' '); // make sure string doesn't have a + in it
     }
   }
 
